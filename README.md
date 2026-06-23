@@ -26,27 +26,45 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
+This project is a number guessing game where the player tries to guess a secret number within a limited number of attempts. The game gives hints after each guess and keeps track of the player's score. The goal of the project was to investigate and fix bugs in AI-generated code
+
 - [ ] Detail which bugs you found.
+While testing the game, I found a few bugs. The biggest issue was that the hints were sometimes backwards. If my guess was too high, the game would tell me to go higher instead of lower. I also noticed that the game sometimes treated numbers like text, which caused incorrect comparisons. Another bug was that the attempt counter started at 1 before I made any guesses and did not always match the guess history.
+
 - [ ] Explain what fixes you applied.
+I moved the check_guess() function into logic_utils.py so the game logic was easier to test. I fixed the hint logic so a high guess says "Go LOWER!" and a low guess says "Go HIGHER!". I also fixed the attempt tracking so attempts start at 0 and only increase after a valid guess. Finally, I added pytest tests and manually tested the game in Streamlit to make sure everything worked.
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+Start the app by running python3 -m streamlit run app.py in the terminal.
+
+The game opens in the browser with a guess input, difficulty setting, score, and attempts left.
+
+Before making a guess, the attempt count starts at 0.
+
+When I submit a guess that is too low, the game correctly tells me to go higher.
+
+Submit a guess that is too high, the game correctly tells me to go lower.
+
+After each valid guess, the attempt counter increases and the guess is saved in the history.
+
+Enter the correct number, the game shows "🎉 Correct!" and displays the final score.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+================ test session starts =======================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0
+rootdir: /Users/gina-mar/Desktop/ai110-module1show-gameglitchinvestigator-starter
+collected 3 items
+
+tests/test_game_logic.py ...                               [100%]
+
+================= 3 passed in 0.00s =======================
 ```
 
 ## 🚀 Stretch Features
